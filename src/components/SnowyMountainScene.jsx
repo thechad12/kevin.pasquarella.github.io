@@ -1,93 +1,130 @@
-import React, {useEffect, useRef} from 'react';
+import React, { useEffect, useRef } from 'react';
 import * as THREE from 'three';
+import { mergeBufferGeometries } from 'three-stdlib';
 
 const SnowyMountainScene = () => {
-    const mount = useRef(null);
+  const mount = useRef();
 
-    useEffect(() => {
-        if (!mount.current) return;
-        const scene = new THREE.Scene();
-        const camera = new THREE.PerspectiveCamera(
-                75, 
-                window.innerWidth / window.innerHeight,
-                0.1,
-                1000,
-            );
-        const renderer = new THREE.WebGLRenderer();
+  useEffect(() => {
+    if (!mount.current) return;
 
-        renderer.setSize(window.innerWidth, window.innerHeight);
-        document.body.appendChild(renderer.domElement);
+    // Set up the scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    mount.current.appendChild(renderer.domElement);
 
-        // Create snowy mountain geometry
-        const coneGeometry = new THREE.ConeGeometry(10, 20, 50);
-        const bufferGeometry = new THREE.BufferGeometry().fromGeometry(coneGeometry);
+    // Create mountain range
+    const mountainGeometry = new THREE.BufferGeometry();
+    const mountainMaterial = new THREE.MeshBasicMaterial({ vertexColors: 2 });
 
-        // Set vertex colors directly in the geometry
-        const colors = new Float32Array(bufferGeometry.attributes.position.count * 3);
-        colors.fill(1); // Set all colors to white
+    const mountainGeometries = [];
 
-        bufferGeometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
+    for (let i = 0; i < 10; i++) {
+    const mountainHeight = Math.random() * 20 + 10;
+    const mountainWidth = Math.random() * 10 + 5;
 
-        const material = new THREE.MeshBasicMaterial({ vertexColors: THREE.VertexColors });
-        const mountain = new THREE.Mesh(bufferGeometry, material);
-        scene.add(mountain);
+    const coneGeometry = new THREE.ConeGeometry(mountainWidth, mountainHeight, 50);
+    const coneColors = new Float32Array(coneGeometry.attributes.position.count * 3);
+    coneColors.fill(1); // Set all colors to white
 
-        // Set mountain position
-        mountain.position.set(0, -5, -30);
+    coneGeometry.setAttribute('color', new THREE.BufferAttribute(coneColors, 3));
 
-        // snow
-        const snowParticles = new THREE.Group()
-        const snowGeometry = new THREE.CircleGeometry(0.1, 6);
-        const snowMaterial = new THREE.MeshBasicMaterial({
-            color: 0xFFFFFF,
-        });
+    const matrix = new THREE.Matrix4();
+    matrix.makeTranslation(0, 0, -i * 20); // Separate each mountain along the z-axis
 
-        for (let i=0; i<1000; i++) {
-            const snowflake = new THREE.Mesh(snowGeometry, snowMaterial);
-            const x = (Math.random() - 0.5) * 50;
-            const y = Math.random() * 20;
-            const z = (Math.random() - 0.5) * 50;
-            snowflake.position.set(x, y, z);
-            snowParticles.add(snowflake);
+    coneGeometry.applyMatrix4(matrix);
+
+    mountainGeometries.push(coneGeometry);
+
+    // Adjust colors for each cone based on its height
+    const color = new THREE.Color().setHSL(0.7 - i * 0.05, 1, 0.7);
+    for (let j = 0; j < coneColors.length; j += 3) {
+        coneColors[j] *= color.r;
+        coneColors[j + 1] *= color.g;
+        coneColors[j + 2] *= color.b;
+    }
+    }
+
+    const mergedGeometry = mergeBufferGeometries(mountainGeometries);
+
+    // Adjust colors for the merged geometry
+    const mountainColors = new Float32Array(mergedGeometry.attributes.position.count * 3);
+    for (let i = 0; i < mountainColors.length; i += 3) {
+    const color = new THREE.Color().setHSL(0.7 - (i / 3) * 0.05, 1, 0.7);
+    mountainColors[i] = color.r;
+    mountainColors[i + 1] = color.g;
+    mountainColors[i + 2] = color.b;
+    }
+
+    mergedGeometry.setAttribute('color', new THREE.BufferAttribute(mountainColors, 3));
+
+    const mountain = new THREE.Mesh(mergedGeometry, mountainMaterial);
+    scene.add(mountain);
+
+    // Set up snow particles
+    const snowParticles = new THREE.Group();
+    const snowflakeGeometry = new THREE.CircleGeometry(0.1, 6);
+    const snowflakeMaterial = new THREE.MeshBasicMaterial({ color: 0xFFFFFF });
+
+    for (let i = 0; i < 1000; i++) {
+      const snowflake = new THREE.Mesh(snowflakeGeometry, snowflakeMaterial);
+      const x = (Math.random() - 0.5) * 50;
+      const y = Math.random() * 20;
+      const z = (Math.random() - 0.5) * 50;
+      snowflake.position.set(x, y, z);
+      snowParticles.add(snowflake);
+    }
+
+    scene.add(snowParticles);
+
+    // Set camera position
+    camera.position.z = 50;
+
+    // Set background color
+    scene.background = new THREE.Color(0x330033); // Purple background
+
+    // Set up animation
+    const animate = () => {
+      requestAnimationFrame(animate);
+
+      // Rotate the mountains
+      mountain.rotation.y += 0.005;
+
+      // Move snow particles
+      snowParticles.children.forEach(snowflake => {
+        snowflake.position.y -= 0.1;
+        if (snowflake.position.y < 0) {
+          snowflake.position.y = 20;
         }
+      });
 
-        scene.add(snowParticles);
+      renderer.render(scene, camera);
+    };
 
-        camera.position.z = 10;
+    // Handle window resize
+    const handleResize = () => {
+      const newWidth = window.innerWidth;
+      const newHeight = window.innerHeight;
 
-        const animate = () => {
-            requestAnimationFrame(animate);
-            rotation.y += 0.005;
+      camera.aspect = newWidth / newHeight;
+      camera.updateProjectionMatrix();
 
-            snowParticles.children.forEach((flake) => {
-                flake.position.y -= 0.1;
-                if (flake.position.y < 0) {
-                    flake.position.y = 20;
-                }
-            });
-            renderer.render(scene, camera);
-        };
+      renderer.setSize(newWidth, newHeight);
+    };
 
-        const handleResize = () => {
-            const newWidth = window.innerWidth;
-            const newHeight = window.innerHeight;
+    window.addEventListener('resize', handleResize);
 
-            camera.aspect = newWidth / newHeight;
-            camera.updateProjectionMatrix();
+    animate();
 
-            renderer.setSize(newWidth, newHeight);
-        }
+    // Clean up event listener on component unmount
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
-        window.addEventListener('resize', handleResize);
-
-        animate();
-        
-        return () => {
-            window.removeEventListener('resize', handleResize)
-        }
-    }, []);
-
-    return <div ref={mount} />;
-}
+  return <div ref={mount} />;
+};
 
 export default SnowyMountainScene;
