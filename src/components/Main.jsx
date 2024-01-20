@@ -20,7 +20,7 @@ const Main = (props) => {
                         left="50%"
                         transform="translate(-50%, -50%)"
                         textAlign="center">
-                        <Text fontSize="2xl" color="white">
+                        <Text fontSize="2xl" color="black">
                             Kevin Pasquarella
                         </Text>
                     </Box>

@@ -1,5 +1,5 @@
 import './App.css';
-import Main from '../src/components/Main';
+import Main from './components/Main';
 import { ChakraProvider, DarkMode } from '@chakra-ui/react'
 import {
   QueryClient,
