@@ -9,7 +9,7 @@ import {
 const App = () => {
   const queryClient = new QueryClient();
   return (
-    <ChakraProvider theme={DarkMode}>
+    <ChakraProvider>
       <QueryClientProvider client={queryClient}>
         <Main />
       </QueryClientProvider>
