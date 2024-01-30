@@ -14,17 +14,17 @@ import {HamburgerIcon} from '@chakra-ui/icons';
           <MenuButton
               as={IconButton}
               aria-label='Options'
-              icon={<HamburgerIcon />}
+              icon={<HamburgerIcon color="#ac95e6"/>}
               variant='outline'
           />
           <MenuList>
-              <MenuItem command='⌘T'>
+              <MenuItem>
               Projects
               </MenuItem>
-              <MenuItem command='⌘N'>
+              <MenuItem>
               About
               </MenuItem>
-              <MenuItem command='⌘⇧N'>
+              <MenuItem>
               GitHub
               </MenuItem>
           </MenuList>

@@ -11,26 +11,30 @@ const Main = (props) => {
             <Box 
                 w='100%' 
                 h='100%' 
-                bg='#0A073B'>
+                bg='#0A073B'
+                fontFamily="poppins"
+                color="#ac95e6">
                 <Nav />
                 <Box
                     position="relative"
-                    top="50%"
+                    top="1rem"
                     left="50%"
                     transform="translate(-50%, -50%)"
                     textAlign="center">
-                    <Text fontSize="2xl" color="black">
+                    <Text 
+                        fontSize="2xl" 
+                        color="#ac95e6">
                         Kevin Pasquarella
                     </Text>
                 </Box>
                 <Box
                     position="relative"
-                    top="5rem"
+                    top="3rem"
                     left="50%"
                     transform="translate(-50%, -50%)"
                     textAlign="center">
-                        <Text fontSize='lg' color='black'>
-                            Software Engineer and Enthusiast
+                        <Text fontSize='lg'>
+                            Software Engineer
                         </Text>
                     </Box>
             </Box>
