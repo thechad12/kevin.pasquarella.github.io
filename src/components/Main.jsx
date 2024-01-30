@@ -22,18 +22,25 @@ const Main = (props) => {
                     transform="translate(-50%, -50%)"
                     textAlign="center">
                     <Text 
-                        fontSize="2xl" 
+                        fontSize="xl" 
+                        color="#d1c6ed"
+                        top='1rem'
+                        position='relative'>
+                        I Am
+                    </Text>
+                    <Text 
+                        fontSize="6xl" 
                         color="#ac95e6">
-                        Kevin Pasquarella
+                        Kevin Pasquarella,
                     </Text>
                 </Box>
                 <Box
                     position="relative"
-                    top="3rem"
+                    top="2rem"
                     left="50%"
                     transform="translate(-50%, -50%)"
                     textAlign="center">
-                        <Text fontSize='lg'>
+                        <Text fontSize='2xl'>
                             Software Engineer
                         </Text>
                     </Box>
