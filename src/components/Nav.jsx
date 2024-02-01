@@ -1,34 +1,32 @@
 import {
-    Menu,
-    MenuButton,
-    MenuList,
-    MenuItem,
+    HStack,
+    Box,
     IconButton,
   } from '@chakra-ui/react'
-import {HamburgerIcon} from '@chakra-ui/icons';
+import { 
+  HiLibrary,
+  HiBriefcase,
+  HiIdentification,
+} from 'react-icons/hi';
+import { FaGithub } from "react-icons/fa";
 
   const Nav = () => {
 
     return (
-        <Menu>
-          <MenuButton
-              as={IconButton}
-              aria-label='Options'
-              icon={<HamburgerIcon color="#ac95e6"/>}
-              variant='outline'
-          />
-          <MenuList>
-              <MenuItem>
-              Projects
-              </MenuItem>
-              <MenuItem>
-              About
-              </MenuItem>
-              <MenuItem>
-              GitHub
-              </MenuItem>
-          </MenuList>
-        </Menu>
+        <HStack spacing={2}>
+          <Box>
+            <IconButton icon={<HiLibrary />}>Main</IconButton>
+          </Box>
+          <Box>
+            <IconButton icon={<HiBriefcase />}>Projects</IconButton>
+          </Box>
+          <Box>
+            <IconButton icon={<HiIdentification />}>About</IconButton>
+          </Box>
+          <Box>
+            <IconButton icon={<FaGithub />}>GitHub</IconButton>
+          </Box>
+        </HStack>
     )
   }
 
