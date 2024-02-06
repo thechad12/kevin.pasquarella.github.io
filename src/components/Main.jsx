@@ -17,7 +17,7 @@ const Main = (props) => {
                 <Nav />
                 <Box
                     position="relative"
-                    top="1rem"
+                    top="6rem"
                     left="50%"
                     transform="translate(-50%, -50%)"
                     textAlign="center">
@@ -29,21 +29,19 @@ const Main = (props) => {
                         I Am
                     </Text>
                     <Text 
-                        fontSize="6xl" 
+                        fontSize="6xl"
+                        top='1rem'
+                        position='relative'
                         color="#ac95e6">
                         Kevin Pasquarella,
                     </Text>
+                    <Text 
+                        fontSize='2xl'
+                        top='1rem'
+                        position='relative'>
+                        Software Engineer
+                    </Text>
                 </Box>
-                <Box
-                    position="relative"
-                    top="2rem"
-                    left="50%"
-                    transform="translate(-50%, -50%)"
-                    textAlign="center">
-                        <Text fontSize='2xl'>
-                            Software Engineer
-                        </Text>
-                    </Box>
             </Box>
         </>
     )
