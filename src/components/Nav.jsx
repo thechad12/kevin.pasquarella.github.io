@@ -1,7 +1,10 @@
 import {
-    HStack,
-    Box,
-    IconButton,
+    Tabs,
+    TabList,
+    Tab,
+    TabPanels,
+    TabPanel,
+    Icon,
     Text
   } from '@chakra-ui/react'
 import { 
@@ -14,24 +17,26 @@ import { FaGithub } from "react-icons/fa";
   const Nav = () => {
 
     return (
-        <HStack spacing={2} position='relative' top='1rem' left='1rem'>
-          <Box bg='#fb9062'>
-            <IconButton bg='#fb9062' icon={<HiLibrary />} />
-              <Text color='#ac95e6' size='md' position='relative'>Main</Text>
-          </Box>
-          <Box bg='#fb9062'>
-            <IconButton bg='#fb9062' icon={<HiBriefcase />}/>
-            <Text color='#ac95e6' size='md' position='relative'>Projects</Text>
-          </Box>
-          <Box bg='#fb9062'>
-            <IconButton bg='#fb9062' icon={<HiIdentification />}/>
-            <Text color='#ac95e6' size='md' position='relative'>About</Text>
-          </Box>
-          <Box bg='#fb9062'>
-            <IconButton bg='#fb9062' icon={<FaGithub />}/>
-            <Text color='#ac95e6' size='md' position='relative'>GitHub</Text>
-          </Box>
-        </HStack>
+        <Tabs spacing={2} position='relative' top='1rem' left='1rem'>
+          <TabList bg='#fb9062'>
+            <Tab>
+                <HiLibrary />
+                <Text color='black' size='md' position='relative'>Main</Text>
+            </Tab>
+            <Tab>
+              <HiBriefcase />
+              <Text color='black' size='md' position='relative'>Projects</Text>
+            </Tab>
+            <Tab>
+              <HiIdentification />
+              <Text color='black' size='md' position='relative'>About</Text>
+            </Tab>
+            <Tab>
+              <FaGithub />
+              <Text color='black' size='md' position='relative'>GitHub</Text>
+            </Tab>
+          </TabList>
+        </Tabs>
     )
   }
 

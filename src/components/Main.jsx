@@ -11,9 +11,8 @@ const Main = (props) => {
             <Box 
                 w='100%' 
                 h='100%' 
-                bg='#0A073B'
                 fontFamily="poppins"
-                color="#ac95e6">
+                bgGradient="linear(to-tl, #6a0d83, #0A073B)">
                 <Nav />
                 <Box
                     position="relative"
@@ -38,6 +37,7 @@ const Main = (props) => {
                     <Text 
                         fontSize='2xl'
                         top='1rem'
+                        color='#ac95e6'
                         position='relative'>
                         Software Engineer
                     </Text>
