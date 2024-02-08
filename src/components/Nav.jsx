@@ -1,10 +1,6 @@
 import {
-    Tabs,
-    TabList,
-    Tab,
-    TabPanels,
-    TabPanel,
-    Icon,
+    HStack,
+    Box,
     Text
   } from '@chakra-ui/react'
 import { 
@@ -17,26 +13,45 @@ import { FaGithub } from "react-icons/fa";
   const Nav = () => {
 
     return (
-        <Tabs spacing={2} position='relative' top='1rem' left='1rem'>
-          <TabList bg='#fb9062'>
-            <Tab>
+        <HStack  
+          position='relative' 
+          top='1rem' 
+          left='22rem'
+          borderBottom='2px solid'
+          width='auto'>
+            <Box position='relative' paddingRight='3rem' display='flex'>
                 <HiLibrary />
-                <Text color='black' size='md' position='relative'>Main</Text>
-            </Tab>
-            <Tab>
+                <Text 
+                  color='black' 
+                  size='lg' 
+                  position='relative' 
+                  paddingLeft='0.5rem'>Main</Text>
+            </Box>
+            <Box paddingRight='3rem' display='flex'>
               <HiBriefcase />
-              <Text color='black' size='md' position='relative'>Projects</Text>
-            </Tab>
-            <Tab>
+              <Text 
+                color='black' 
+                size='lg' 
+                position='relative' 
+                paddingLeft='0.5rem'>Projects</Text>
+            </Box>
+            <Box paddingRight='3rem' display='flex'>
               <HiIdentification />
-              <Text color='black' size='md' position='relative'>About</Text>
-            </Tab>
-            <Tab>
+              <Text 
+                color='black' 
+                size='lg' 
+                position='relative' 
+                paddingLeft='0.5rem'>About</Text>
+            </Box>
+            <Box paddingRight='3rem' display='flex'>
               <FaGithub />
-              <Text color='black' size='md' position='relative'>GitHub</Text>
-            </Tab>
-          </TabList>
-        </Tabs>
+              <Text 
+                color='black' 
+                size='lg' 
+                position='relative' 
+                paddingLeft='0.5rem'>GitHub</Text>
+            </Box>
+        </HStack>
     )
   }
 

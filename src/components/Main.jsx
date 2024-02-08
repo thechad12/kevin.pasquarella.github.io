@@ -12,7 +12,10 @@ const Main = (props) => {
                 w='100%' 
                 h='100%' 
                 fontFamily="poppins"
-                bgGradient="linear(to-tl, #6a0d83, #0A073B)">
+                border='30px solid'
+                borderRadius='1px'
+                bg='#FFFFFF'
+                borderColor="#6a0d83">
                 <Nav />
                 <Box
                     position="relative"
@@ -22,7 +25,7 @@ const Main = (props) => {
                     textAlign="center">
                     <Text 
                         fontSize="xl" 
-                        color="#d1c6ed"
+                        color="#0A073B"
                         top='1rem'
                         position='relative'>
                         I Am
@@ -31,13 +34,13 @@ const Main = (props) => {
                         fontSize="6xl"
                         top='1rem'
                         position='relative'
-                        color="#ac95e6">
+                        color="#0A073B">
                         Kevin Pasquarella,
                     </Text>
                     <Text 
                         fontSize='2xl'
                         top='1rem'
-                        color='#ac95e6'
+                        color='#0A073B'
                         position='relative'>
                         Software Engineer
                     </Text>
