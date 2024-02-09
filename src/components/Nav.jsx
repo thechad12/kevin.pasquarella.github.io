@@ -16,9 +16,9 @@ import { FaGithub } from "react-icons/fa";
         <HStack  
           position='relative' 
           top='1rem' 
-          left='22rem'
           borderBottom='2px solid'
-          width='auto'>
+          width='auto'
+          justifyContent='center'>
             <Box position='relative' paddingRight='3rem' display='flex'>
                 <HiLibrary />
                 <Text 
